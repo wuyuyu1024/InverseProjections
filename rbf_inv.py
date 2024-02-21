@@ -2,7 +2,11 @@ import numpy as np
 from scipy.spatial.distance import cdist
 from scipy.linalg import solve
 
-def rbf_function(r, function_type='gaussian', c=0, epsilon=1.0):
+# Constants as provided
+MATH_CONST_e = 2.71828
+MATH_CONST_E = 1.30568
+
+def rbf_function(r, function_type='gaussian', c=0, epsilon=MATH_CONST_E):
     if function_type == 'gaussian':
         return np.exp(-(epsilon*r)**2)
     elif function_type == 'multiquadric':
@@ -10,7 +14,7 @@ def rbf_function(r, function_type='gaussian', c=0, epsilon=1.0):
 
     # Add more RBF types as needed
 
-def build_interpolation_matrix(X2d, function_type='gaussian', c=0, epsilon=1.0):
+def build_interpolation_matrix(X2d, function_type='gaussian', c=0, epsilon=MATH_CONST_E):
     # Compute the pairwise distances between points
     r = cdist(X2d, X2d, 'euclidean')
     # Apply the chosen RBF function
@@ -31,7 +35,7 @@ def build_interpolation_matrix(X2d, function_type='gaussian', c=0, epsilon=1.0):
 
 class RBFinv:
     """sklearn API for RBF interpolation"""
-    def __init__(self, function_type='multiquadric', c=0, epsilon=1.0):
+    def __init__(self, function_type='multiquadric', c=0, epsilon=MATH_CONST_E):
         self.function_type = function_type
         self.c = c ## the RBF paper uses c=0 in their face example
         self.epsilon = epsilon
