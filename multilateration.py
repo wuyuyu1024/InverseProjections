@@ -67,6 +67,7 @@ def get_random_points(data, reduced_data, p):
     to the point p 
     
     '''
+    # print(data.shape)
     n = data.shape[1] #dimensionality in high dimensional space
     #return n+1 random points
     random_indices = np.random.choice(data.shape[0], n+1, replace=False) # randomly select indices
@@ -168,6 +169,7 @@ def get_any_high_dimensional_position(data, reduced_data, point, point_selection
         estimated position of point in high-dimensional space.
 
     '''
+    # print(data.shape, reduced_data.shape, point.shape)
     point = point.reshape(1,-1)
     #get n+1 points according to point selection strategy
     if point_selection == 'furthest':
@@ -198,11 +200,17 @@ class MDSinv:
         self.X = X
         self.X2d = X2d
 
-    def transform(self, ps, **kwarg):
+    def transform(self, p_list, **kwarg):
+        # p_list = np.array(p_list)
+        # v_func = np.vectorize(get_any_high_dimensional_position)
+        # return v_func(self.X, self.X2d, p_list, self.point_selection, self.trials)
         Xnd_recons = []
-        for p in ps:
+        for p in p_list:
             pnd = get_any_high_dimensional_position(self.X, self.X2d, p, self.point_selection, self.trials)
-            Xnd_recons.append(pnd)
+            Xnd_recons.append(pnd.reshape(-1))
+        print(len(Xnd_recons))
+        print(Xnd_recons[0].shape)
+        print(Xnd_recons[2].shape)
         return np.array(Xnd_recons).reshape(-1, self.X.shape[1])
     
     def inverse_transform(self, p, **kwarg):
