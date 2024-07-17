@@ -208,9 +208,6 @@ class MDSinv:
         for p in p_list:
             pnd = get_any_high_dimensional_position(self.X, self.X2d, p, self.point_selection, self.trials)
             Xnd_recons.append(pnd.reshape(-1))
-        print(len(Xnd_recons))
-        print(Xnd_recons[0].shape)
-        print(Xnd_recons[2].shape)
         return np.array(Xnd_recons).reshape(-1, self.X.shape[1])
     
     def inverse_transform(self, p, **kwarg):

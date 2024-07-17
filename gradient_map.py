@@ -34,8 +34,15 @@ def get_gradient_map(projecters=None, x2d=None, grid=100):
 
     Dx = ndgrid_padding[2:, 1:-1] - ndgrid_padding[:-2, 1:-1]
     Dy = ndgrid_padding[1:-1, 2:] - ndgrid_padding[1:-1, :-2]
-    Dx = Dx / (2 * pixel_width)
-    Dy = Dy / (2 * pixel_height)
+
+    ### original implementation
+    w = 1/ grid
+    Dx = Dx / (2 * w)
+    Dy = Dy / (2 * w)
+    ## just assume the pixel width and height are both 1
+    # Dx = Dx / 2
+    # Dy = Dy / 2
+
     # get the gradient norm
     D = np.sqrt(np.sum(Dx**2, axis=2) + np.sum(Dy**2, axis=2))
     ## This is the gradient map according to the equations in UnProjeciton paper 
