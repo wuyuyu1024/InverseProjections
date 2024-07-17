@@ -30,7 +30,7 @@ def get_gradient_map(projecters=None, x2d=None, grid=100):
     ndgrid_padding = ndgrid_padding.reshape(grid_pad, grid_pad, -1)
     ## remove the padding for gradient map. 
     ## This is the inverse porjection for all the pixels. It can be cached for downstream use, such as decision boundary map
-    ndgrid = ndgrid_padding[1:-1, 1:-1, :].reshape(len(x2d), -1)
+    ndgrid = ndgrid_padding[1:-1, 1:-1, :].reshape(grid*grid, -1)
 
     Dx = ndgrid_padding[2:, 1:-1] - ndgrid_padding[:-2, 1:-1]
     Dy = ndgrid_padding[1:-1, 2:] - ndgrid_padding[1:-1, :-2]

@@ -63,11 +63,11 @@ class NNinv_torch:
             self.model = self.create_model(X.shape[1])
 
         #### original init ####################################################
-        # for m in self.model.modules():
-        #     if isinstance(m, nn.Linear):
-        #         nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
-        #         nn.init.constant_(m.bias, self.bias)
-        ############### not recommended, especially for small datasets ########
+        for m in self.model.modules():
+            if isinstance(m, nn.Linear):
+                nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
+                nn.init.constant_(m.bias, self.bias)
+        ############### 
 
         for epoch in range(epochs):
             loss_per_epoch = 0
