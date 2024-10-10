@@ -1,6 +1,10 @@
+### Reimplementation of the RBF inverse projection method according to the paper:
+### https://www.sciencedirect.com/science/article/pii/S0097849315000230
+
 import numpy as np
 from scipy.spatial.distance import cdist
 from scipy.linalg import solve
+from tqdm import tqdm
 
 # Constants as provided
 MATH_CONST_e = 2.71828
@@ -46,10 +50,14 @@ class RBFinv:
         Phi = build_interpolation_matrix(X2d, self.function_type, self.c, self.epsilon)
         self.coefficients = solve(Phi, Xnd)
 
-    def transform(self, p, **kwargs):
-        r_new = cdist(p, self.X2d, 'euclidean')
-        Phi_new = rbf_function(r_new, self.function_type, self.c, self.epsilon)
-        return Phi_new @ self.coefficients
+    def transform(self, p, batch_size=1000, **kwargs):
+        results = []
+        for i in tqdm(range(0, len(p), batch_size)):
+            p_batch = p[i:i+batch_size]
+            r_new = cdist(p_batch, self.X2d, 'euclidean')
+            Phi_new = rbf_function(r_new, self.function_type, self.c, self.epsilon)
+            results.append(Phi_new @ self.coefficients)
+        return np.concatenate(results, axis=0)
     
     def inverse_transform(self, p, **kwargs):
         return self.transform(p)
