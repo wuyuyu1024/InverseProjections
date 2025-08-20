@@ -12,7 +12,7 @@ import numpy as np
 
 #### Pytorch version NNinv
 class NNinv_net(nn.Module):
-    def __init__(self, out_dim, dims=[2048, 2048, 2048, 2048], bottleneck_dim=2):
+    def __init__(self, out_dim, dims=[128, 256, 512, 1024], bottleneck_dim=2):
         super(NNinv_net, self).__init__()
 
         self.network = nn.Sequential(
@@ -31,9 +31,9 @@ class NNinv_net(nn.Module):
     def forward(self, x):
         return self.network(x)
 
-class NNinv_torch:
+class NNinv:
     ### wrapper for sklearn API
-    def __init__(self, dims=[2048, 2048, 2048, 2048], bottleneck_dim=2):
+    def __init__(self, dims=[128, 256, 512, 1024], bottleneck_dim=2):
         self.model = None
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print('device: ', self.device)
@@ -63,10 +63,10 @@ class NNinv_torch:
             self.model = self.create_model(X.shape[1])
 
         #### original init ####################################################
-        for m in self.model.modules():
-            if isinstance(m, nn.Linear):
-                nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
-                nn.init.constant_(m.bias, self.bias)
+        # for m in self.model.modules():
+        #     if isinstance(m, nn.Linear):
+        #         nn.init.kaiming_uniform_(m.weight, nonlinearity='relu')
+        #         nn.init.constant_(m.bias, self.bias)
         ############### 
 
         for epoch in range(epochs):
