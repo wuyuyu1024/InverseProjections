@@ -70,7 +70,11 @@ def get_random_points(data, reduced_data, p):
     # print(data.shape)
     n = data.shape[1] #dimensionality in high dimensional space
     #return n+1 random points
-    random_indices = np.random.choice(data.shape[0], n+1, replace=False) # randomly select indices
+    try:
+        random_indices = np.random.choice(data.shape[0], n+1, replace=False) # randomly select indices
+    except ValueError:
+        random_indices = np.random.choice(data.shape[0], n+1, replace=True) # allow replacement
+        
     while np.any([np.array_equal(p, point) for point in reduced_data[random_indices]]): # ensure p is not a selected point 
         random_indices = np.random.choice(data.shape[0], n+1, replace=False)
     random_P = data[random_indices] 

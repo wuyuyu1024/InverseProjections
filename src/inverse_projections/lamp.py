@@ -252,7 +252,7 @@ def refine_lamp(X, X_proj, max_iter=50, k=8):
 
 
 ### wrapper for sklearn API
-class Pinv_ilamp:
+class ILAMP:
     def __init__(self, data=None, data_proj=None, p=None, k=6, pre_kdtree=None):
         self.data = data
         self.data_proj = data_proj
