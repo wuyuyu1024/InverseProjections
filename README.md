@@ -27,7 +27,7 @@ from sklearn.manifold import TSNE
 X = np.random.rand(1000, 50)
 
 # Create 2D projection
-X2d = MDS().fit_transform(X)
+X2d = TSNE().fit_transform(X)
 
 # Train inverse projection
 nninv = NNinv()

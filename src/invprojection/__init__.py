@@ -11,8 +11,7 @@ from .rbf import RBFinv
 from .multilateration import MDSinv
 from .gradient_map import get_gradient_map
 
-__version__ = "0.1.0"
-__author__ = "InverseProjections Contributors"
+__author__ = "Yu Wang"
 
 __all__ = [
     "NNinv",
