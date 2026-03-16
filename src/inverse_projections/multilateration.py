@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.linalg import null_space
-import pandas as pd
 from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import euclidean_distances
 

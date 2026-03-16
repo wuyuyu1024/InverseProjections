@@ -1,11 +1,10 @@
 ## Code according to Espadoto, M., Rodrigues, F. C. M., Hirata, N. S. T., & Hirata Jr, R. (2019). Deep Learning Inverse Multidimensional Projections. Proc. EuroVA, 5.
 
-
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+# import torch.nn.functional as F
 import torch.optim as optim
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
 
