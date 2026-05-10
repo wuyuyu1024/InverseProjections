@@ -1,6 +1,14 @@
 # Inverse Projections
 
-A Python package implementing inverse projection techniques for dimensionality reduction. Map points from low-dimensional visualizations back to high-dimensional space.
+A Python package implementing inverse projection techniques for dimensionality reduction. It maps points from low-dimensional visualizations back to high-dimensional space, using a scikit-learn-style API for research prototypes, visual analytics workflows, and reproducible method comparisons.
+
+## Research Software Signals
+
+- Packaged Python implementation published as `inverse-projections`.
+- Reusable estimators with `fit()`, `transform()`, and `inverse_transform()` methods.
+- Multiple inverse projection baselines in one API: NNinv, iLAMP, RBF inverse mapping, and multilateration.
+- Example notebooks for method comparison and gradient-map quality assessment.
+- MIT licensed for reuse in research and teaching projects.
 
 ## Features
 
@@ -14,6 +22,12 @@ A Python package implementing inverse projection techniques for dimensionality r
 
 ```bash
 pip install inverse-projections
+```
+
+For local development from a checkout:
+
+```bash
+uv sync
 ```
 
 ## Quick Start
@@ -41,12 +55,20 @@ reconstructed = nninv.transform(new_2d_points)
 ## Examples
 
 See the `examples/` directory for detailed demonstrations:
+
 - `demo.ipynb`: MNIST dataset comparison
 - `demo_gradient_map.ipynb`: Quality assessment with gradient maps
 
 ## Methods
 
 All methods follow sklearn-compatible API with `fit()`, `transform()`, and `inverse_transform()` methods.
+
+## Repository Structure
+
+- `src/inverse_projections/`: package source code.
+- `examples/`: demonstration notebooks.
+- `pyproject.toml`: package metadata and dependencies.
+- `uv.lock`: locked development environment.
 
 ## Reference
 
@@ -64,4 +86,4 @@ Based on the following research papers:
 
 ## License
 
-MIT License
+This repository is released under the MIT License. See [`LICENSE`](LICENSE) for details.
